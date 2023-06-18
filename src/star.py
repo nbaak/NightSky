@@ -11,8 +11,7 @@ class Star:
         # Randomly generate azimuth and altitude if not provided
         self.azimuth = azimuth if azimuth is not None else random.uniform(0, 360)
         self.altitude = altitude if altitude is not None else random.uniform(0, 90)
-        self.original_color = color if color is not None else self.generate_color()
-        self.color = self.original_color
+        self.color = color if color is not None else self.generate_color()
         self.radius = 1
 
     def generate_color(self):
@@ -42,3 +41,6 @@ class Star:
         normalized_x = (azimuth - rotation + (field_of_view // 2)) % 360 / field_of_view
         normalized_y = altitude / 90
         return normalized_x, normalized_y
+    
+    def __repr__(self):
+        return f"{self.azimuth} {self.altitude}"

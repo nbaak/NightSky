@@ -36,7 +36,16 @@ def main():
 
         screen.fill(colors.BLACK)  # Clear the screen
 
+        # Calculate the visible stars within the screen area
+        visible_stars = []
         for star in stars:
+            normalized_x, normalized_y = star.normalize_coordinates(star.azimuth, star.altitude, rotation, config.FIELD_OF_VIEW)
+            screen_x = int(normalized_x * config.WIDTH)
+            screen_y = int(normalized_y * config.HEIGHT)
+            if 0 <= screen_x <= config.WIDTH and 0 <= screen_y <= config.HEIGHT:
+                visible_stars.append(star)
+
+        for star in visible_stars:
             star.draw(screen, rotation)
 
         # Render the rotation angle text
@@ -44,7 +53,8 @@ def main():
         screen.blit(angle_text, (10, 10))
 
         pygame.display.flip()
-        clock.tick(config.CLOCK_SPEED)  # Set the desired frame rate
+        clock.tick(config.CLOCK_SPEED)
+
 
 
 # Save a screenshot with a UUID as the image name
