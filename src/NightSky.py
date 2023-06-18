@@ -2,9 +2,13 @@ import pygame
 import random
 import config
 import colors
+import os
+import uuid
+
 
 # Star class
 class Star:
+
     def __init__(self, azimuth=None, altitude=None, color=None):
         # Randomly generate azimuth and altitude
         self.azimuth = azimuth if azimuth is not None else random.uniform(0, 360)
@@ -22,11 +26,24 @@ class Star:
             # Draw the star as a solid point with its assigned color
             pygame.draw.circle(screen, self.color, (screen_x, screen_y), 1)
 
+
 # Normalize coordinates based on rotation and field of view
 def normalize_coordinates(azimuth, altitude, rotation, field_of_view):
-    normalized_x = (azimuth - rotation + (field_of_view//2)) % 360 / field_of_view
+    normalized_x = (azimuth - rotation + (field_of_view // 2)) % 360 / field_of_view
     normalized_y = altitude / 90
     return normalized_x, normalized_y
+
+
+# Save image to screenshots folder
+def save_image(surface):
+    folder_path = "screenshots"
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+    image_name = f"{uuid.uuid4().hex}.png"
+    image_path = os.path.join(folder_path, image_name)
+    pygame.image.save(surface, image_path)
+    print(f"Screenshot saved: {image_path}")
+
 
 # Initialize pygame
 pygame.init()
@@ -38,13 +55,12 @@ clock = pygame.time.Clock()
 stars = [Star() for _ in range(config.NUM_STARS)]
 stars.append(Star(0, 10, colors.RED))  # North Star :D
 
+
 # Main loop
 def main():
     rotation = 0  # Initial rotation
 
     font = pygame.font.Font(None, 30)  # Create a font object
-
-    screenshot_counter = 1  # Counter for screenshot filenames
 
     while True:
         for event in pygame.event.get():
@@ -57,10 +73,8 @@ def main():
             rotation = (rotation - 10) % 360
         if keys[pygame.K_RIGHT]:
             rotation = (rotation + 10) % 360
-        if keys[pygame.K_s]:  # Take a screenshot when 's' key is pressed
-            screenshot_filename = f"screenshots/screenshot{str(screenshot_counter).zfill(3)}.png"
-            pygame.image.save(screen, screenshot_filename)
-            screenshot_counter += 1
+        if keys[pygame.K_s]:
+            save_image(screen)
 
         screen.fill(colors.BLACK)  # Clear the screen
 
@@ -72,7 +86,8 @@ def main():
         screen.blit(angle_text, (10, 10))
 
         pygame.display.flip()
-        clock.tick(config.clock_speed)  # Set the desired frame rate
+        clock.tick(config.clock_speed)
+
 
 if __name__ == "__main__":
     main()
