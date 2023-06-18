@@ -36,12 +36,16 @@ Night Sky is a simple Python program that generates a random starry sky and allo
 
 ## Configuration
 
-The behavior of the Night Sky program can be customized through the config.py file. Modify the settings in the file according to your preferences.
+You can customize the following parameters in the config.py file:
 
-- WIDTH and HEIGHT: Dimensions of the program window.
-- FIELD_OF_VIEW: Field of view angle in degrees.
-- NUM_STARS: Number of stars to generate.
-- clock_speed: Frame rate of the program.
+- `WIDTH` and `HEIGHT`: Set the dimensions of the window.
+- `NUM_STARS`: Adjust the number of stars in the sky.
+- `FIELD_OF_VIEW`: Control the width of the field of view.
+- `CLOCK_SPEED`: Set the desired frame rate.
+- `TWINKLE_PROBABILITY`: Adjust the probability of stars twinkling.
+
+You can also modify the colors.py file to change the color scheme of the stars and the background.
+
 
 ## Contributing
 
