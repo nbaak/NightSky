@@ -13,6 +13,7 @@ clock = pygame.time.Clock()
 stars = [Star() for _ in range(config.NUM_STARS)]
 stars.append(Star(0, 10, colors.RED))  # North Star :D
 
+
 # Main loop
 def main():
     rotation = 0  # Initial rotation
@@ -45,6 +46,7 @@ def main():
         pygame.display.flip()
         clock.tick(config.CLOCK_SPEED)  # Set the desired frame rate
 
+
 # Save a screenshot with a UUID as the image name
 def save_screenshot():
     import os
@@ -58,6 +60,7 @@ def save_screenshot():
     filename = f"screenshots/screenshot_{str(uuid.uuid4())}.png"
     pygame.image.save(screen, filename)
     print(f"Screenshot saved as {filename}")
+
 
 if __name__ == "__main__":
     main()

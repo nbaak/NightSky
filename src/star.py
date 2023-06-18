@@ -3,6 +3,7 @@ import random
 import colors
 import config
 
+
 # Star class
 class Star:
 
@@ -32,7 +33,7 @@ class Star:
         if 0 <= screen_x <= config.WIDTH and 0 <= screen_y <= config.HEIGHT:
             # Draw the outer glow for twinkling effect
             if random.random() < config.TWINKLE_PROBABILITY:
-                pygame.draw.circle(screen, colors.make_transparent(self.color, random.randint(0,128)), (screen_x, screen_y), self.radius + random.randint(1,4))
+                pygame.draw.circle(screen, colors.make_transparent(self.color, random.randint(0, 128)), (screen_x, screen_y), self.radius + random.randint(1, 4))
             # Draw the star as a solid point with its assigned color
             pygame.draw.circle(screen, self.color, (screen_x, screen_y), self.radius)
 
