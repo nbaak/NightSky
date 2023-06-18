@@ -2,6 +2,9 @@
 
 Night Sky is a simple Python program that generates a random starry sky and allows you to explore it by rotating your view. You can adjust the field of view and navigate through the sky using the arrow keys. The program also provides the option to take screenshots of the current view.
 
+
+![Preview](preview.png)
+
 ## Features
 
 - Randomly generated stars spread across the sky.
